@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Windvorhersage — Vorpommersche Ostseeküste</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #07101e;
+  color: #d8e8f5;
+  min-height: 100vh;
+  padding: 28px 16px 48px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 26px;
+}
+header h1 {
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #b8d4f0;
+  letter-spacing: 0.02em;
+}
+header .subtitle {
+  margin-top: 6px;
+  font-size: 0.84rem;
+  color: #5888b0;
+}
+header .timestamp {
+  margin-top: 4px;
+  font-size: 0.74rem;
+  color: #3a5870;
+}
+
+/* BFT-Skala */
+.scale-wrap {
+  max-width: 1000px;
+  margin: 0 auto 28px;
+}
+.scale-title {
+  text-align: center;
+  font-size: 0.66rem;
+  color: #3a5870;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 6px;
+}
+.bft-scale {
+  display: flex;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 32px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+}
+.bft-scale-seg {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+}
+
+/* Haupttabelle */
+.table-wrap {
+  max-width: 1000px;
+  margin: 0 auto 28px;
+  background: rgba(255,255,255,0.034);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 22px rgba(0,0,0,0.42);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Kopfzeile: Tage */
+thead th {
+  padding: 10px 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #5888b0;
+  text-align: center;
+  background: rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.09);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+thead th:first-child {
+  text-align: left;
+  padding-left: 18px;
+  min-width: 160px;
+  color: #4070a0;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+}
+
+/* Datenzeilen: Orte */
+tbody tr {
+  border-bottom: 1px solid rgba(255,255,255,0.055);
+}
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: rgba(255,255,255,0.025); }
+
+tbody td {
+  padding: 7px 6px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Erste Spalte: Ortsname */
+tbody td:first-child {
+  text-align: left;
+  padding-left: 18px;
+  padding-right: 12px;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.ort-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #b0cce8;
+  line-height: 1.2;
+}
+.ort-sub {
+  display: none;
+}
+
+/* Wind-Zelle */
+.wind-cell {
+  border-radius: 9px;
+  padding: 8px 5px !important;
+  cursor: default;
+  transition: filter 0.15s;
+  min-width: 80px;
+}
+.wind-cell:hover { filter: brightness(1.13); }
+
+.bft-num {
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 1;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.6);
+  letter-spacing: -0.01em;
+}
+.bft-std {
+  font-size: 0.72rem;
+  font-weight: 600;
+  opacity: 0.78;
+  vertical-align: middle;
+}
+.bft-unit {
+  font-size: 0.57rem;
+  font-weight: 700;
+  opacity: 0.82;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 1px;
+}
+.wind-dir {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-top: 5px;
+  letter-spacing: 0.03em;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.55);
+  border-top: 1px solid rgba(255,255,255,0.22);
+  padding-top: 4px;
+  line-height: 1.2;
+}
+.n-row {
+  font-size: 0.54rem;
+  opacity: 0.45;
+  margin-top: 1px;
+}
+.no-data {
+  color: #243848;
+  font-size: 0.8rem;
+}
+
+/* Fußnoten */
+.footnotes {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.022);
+  border: 1px solid rgba(255,255,255,0.055);
+  border-radius: 10px;
+  padding: 15px 20px;
+}
+.footnotes h3 {
+  font-size: 0.72rem;
+  color: #4888a8;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 9px;
+}
+.footnotes ul { list-style: none; }
+.footnotes li {
+  font-size: 0.7rem;
+  color: #3d6070;
+  padding: 2px 0 2px 14px;
+  position: relative;
+  line-height: 1.45;
+}
+.footnotes li::before { content: '▸'; position: absolute; left: 0; color: #254858; }
+.footnotes a { color: #4888b8; text-decoration: none; }
+.footnotes a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Windvorhersage</h1>
+  <p class="subtitle">
+    Dierhagen &nbsp;&bull;&nbsp; Zingst &nbsp;&bull;&nbsp; Stralsund &nbsp;&bull;&nbsp;
+    Arkona &nbsp;&bull;&nbsp; Lubmin &nbsp;&bull;&nbsp; Göhren &nbsp;
+    <span style="color:#2a4858">(West &rarr; Ost)</span>
+  </p>
+  <p class="timestamp">Montag, 20. April 2026, 17:54 Uhr MESZ &nbsp;&bull;&nbsp; Quellen: DWD MOSMIX L, Open-Meteo (ICON, GFS, ECMWF) &mdash; 4 Modelle je Ort</p>
+</header>
+
+<div class="scale-wrap">
+  <p class="scale-title">Beaufort-Farbskala: 0 Bft = Dunkelblau &rarr; 3 Bft = Hellblau &rarr; 4 Bft = Hellgrün &rarr; 5 Bft = Dunkelgrün &rarr; 8 Bft = Rot &rarr; 10 Bft = Lila</p>
+  <div class="bft-scale" id="bft-scale"></div>
+</div>
+
+<div class="table-wrap">
+  <table id="main-table"></table>
+</div>
+
+<div class="footnotes">
+  <h3>Quellen &amp; Methodik</h3>
+  <ul>
+    <li><a href="https://opendata.dwd.de/weather/local_forecasts/mos/MOSMIX_L/" target="_blank">DWD MOSMIX L</a> &mdash; ICON-basiert, stündlich, aktueller Lauf 20.04.2026; Stationen 10028/10033/10034/10035/10091/10184</li>
+    <li><a href="https://open-meteo.com" target="_blank">Open-Meteo API</a> &mdash; ICON seamless, GFS seamless, ECMWF IFS 0.25°, Koordinatenabfrage 10 m Höhe, alle 6 Orte</li>
+    <li><strong>Median:</strong> Ein Repräsentativwert pro Quelle (nächster verfügbarer Zeitstempel zum Zielzeitpunkt). Median und Stddev werden über die 4 Modellwerte berechnet (n=4).</li>
+    <li><strong>Standardabweichung (&plusmn;):</strong> Streuung zwischen den Modellen in Bft &mdash; kleinere Werte = höhere Modellkonsistenz.</li>
+    <li><strong>Windrichtung:</strong> Herkunftsrichtung (meteorolog. Konvention). Zirkulärer Mittelwert aller Modelle.</li>
+  </ul>
+</div>
+
+<script>
+// =============================================
+// FARBINTERPOLATION 0–12 Bft
+// =============================================
+function bftBg(bft) {
+  const stops = [
+    [0,  [ 30,  60, 160]],  // Mittelblau (sichtbar vom Hintergrund)
+    [1,  [ 20, 100, 220]],  // Blau
+    [2,  [ 10, 140, 240]],  // Blau (heller)
+    [3,  [ 80, 200, 240]],  // Hellblau
+    [4,  [100, 220,  80]],  // Hellgrün
+    [5,  [  0, 130,  20]],  // Dunkelgrün
+    [6,  [220, 170,   0]],  // Gelb-Orange
+    [7,  [230,  80,   0]],  // Orange-Rot
+    [8,  [210,   0,   0]],  // Rot
+    [9,  [160,   0,  60]],  // Dunkelrot
+    [10, [110,   0, 180]],  // Lila
+  ];
+  const v = Math.max(0, Math.min(10, bft));
+  let lo = stops[0], hi = stops[stops.length - 1];
+  for (let i = 0; i < stops.length - 1; i++) {
+    if (v >= stops[i][0] && v <= stops[i+1][0]) { lo = stops[i]; hi = stops[i+1]; break; }
+  }
+  const t = hi[0] === lo[0] ? 0 : (v - lo[0]) / (hi[0] - lo[0]);
+  const r = Math.round((lo[1][0] + t*(hi[1][0]-lo[1][0])) * 0.62);
+  const g = Math.round((lo[1][1] + t*(hi[1][1]-lo[1][1])) * 0.62);
+  const b = Math.round((lo[1][2] + t*(hi[1][2]-lo[1][2])) * 0.62);
+  return `rgb(${r},${g},${b})`;
+}
+
+// Bft-Skala aufbauen
+const scaleEl = document.getElementById('bft-scale');
+for (let i = 0; i <= 10; i++) {
+  const seg = document.createElement('div');
+  seg.className = 'bft-scale-seg';
+  seg.style.background = bftBg(i);
+  seg.textContent = i;
+  scaleEl.appendChild(seg);
+}
+
+// =============================================
+// ZEITHORIZONTE (Spalten)
+// =============================================
+const HORIZONTE = [
+  { label: 'Aktuell',        sub: 'Mo, 20.04. ~18 Uhr' },
+  { label: 'Morgen',         sub: 'Di, 21.04. (+1 T)' },
+  { label: 'Mi, 22.04.',     sub: '+2 Tage' },
+  { label: 'Fr, 24.04.',     sub: '+4 Tage' },
+  { label: 'Mo, 27.04.',     sub: '+7 Tage' },
+];
+
+// =============================================
+// ORTE (Zeilen) — sortiert West nach Ost nach Längengrad
+// Dierhagen 12.52° → Zingst 12.68° → Stralsund 13.08° → Arkona 13.43° → Lubmin 13.65° → Göhren 13.74°
+// =============================================
+// Format je Horizont: [median_bft, std_bft, richtung, n_quellen]
+const ORTE = [
+  {
+    name: 'Dierhagen',
+    sub:  'Fischland · 12°31\'O',
+    data: [
+      [5.0, 0.0, 'ONO', 4],
+      [4.0, 0.5, 'NO', 4],
+      [3.0, 0.5, 'WNW', 4],
+      [3.5, 0.96, 'WNW', 4],
+      [2.5, 0.96, 'NNO', 4],
+    ]
+  },
+  {
+    name: 'Zingst',
+    sub:  'Darß-Halbinsel · 12°41\'O',
+    data: [
+      [5.0, 0.5, 'ONO', 4],
+      [3.5, 0.58, 'NO', 4],
+      [3.0, 0.5, 'NW', 4],
+      [3.0, 1.0, 'WNW', 4],
+      [2.5, 1.29, 'NNO', 4],
+    ]
+  },
+  {
+    name: 'Stralsund',
+    sub:  'Strelasund · 13°05\'O',
+    data: [
+      [5.0, 0.82, 'ONO', 4],
+      [3.0, 0.5, 'NO', 4],
+      [3.0, 0.82, 'NW', 4],
+      [3.0, 0.0, 'WNW', 4],
+      [2.5, 0.96, 'NNO', 4],
+    ]
+  },
+  {
+    name: 'Arkona',
+    sub:  'Rügen Nord · 13°26\'O',
+    data: [
+      [5.5, 0.96, 'ONO', 4],
+      [4.0, 0.5, 'NO', 4],
+      [4.0, 0.5, 'WNW', 4],
+      [4.0, 0.5, 'WNW', 4],
+      [2.5, 0.96, 'N', 4],
+    ]
+  },
+  {
+    name: 'Lubmin',
+    sub:  'Greifswalder Bucht · 13°39\'O',
+    data: [
+      [5.0, 0.5, 'ONO', 4],
+      [3.0, 0.5, 'NO', 4],
+      [3.0, 0.5, 'NW', 4],
+      [3.0, 0.5, 'WNW', 4],
+      [2.5, 0.96, 'NNO', 4],
+    ]
+  },
+  {
+    name: 'Göhren',
+    sub:  'Rügen Südost · 13°44\'O',
+    data: [
+      [6.0, 0.82, 'NO', 4],
+      [4.0, 0.0, 'NO', 4],
+      [4.0, 0.5, 'NW', 4],
+      [4.0, 0.5, 'WNW', 4],
+      [2.5, 0.96, 'NNO', 4],
+    ]
+  },
+];
+
+// =============================================
+// TABELLE AUFBAUEN — Zeiten = Zeilen, Orte = Spalten
+// =============================================
+const tbl = document.getElementById('main-table');
+
+// THEAD: erste Spalte leer, dann je ein Ort
+const thead = tbl.createTHead();
+const hrow = thead.insertRow();
+
+const th0 = document.createElement('th');
+th0.textContent = '';
+hrow.appendChild(th0);
+
+for (const ort of ORTE) {
+  const th = document.createElement('th');
+  th.innerHTML = `<div class="ort-name">${ort.name}</div>`;
+  hrow.appendChild(th);
+}
+
+// TBODY: eine Zeile pro Zeithorizont
+const tbody = tbl.createTBody();
+
+for (let hi = 0; hi < HORIZONTE.length; hi++) {
+  const h = HORIZONTE[hi];
+  const row = tbody.insertRow();
+
+  // Zeit-Zelle
+  const tdTime = row.insertCell();
+  tdTime.innerHTML = `<div style="font-size:0.88rem;font-weight:700;color:#b0cce8;line-height:1.2">${h.label}</div><div style="font-size:0.64rem;color:#3d6070;margin-top:2px">${h.sub}</div>`;
+
+  // Wind-Zellen je Ort
+  for (const ort of ORTE) {
+    const [median, std, dir, n] = ort.data[hi];
+    const td = row.insertCell();
+    td.className = 'wind-cell';
+    td.style.background = bftBg(median);
+    td.style.color = '#ffffff';
+    const dispVal = Number.isInteger(median) ? median : median.toFixed(1);
+    td.innerHTML = `
+      <div class="bft-num">${dispVal}&thinsp;<span class="bft-std">&plusmn;${std.toFixed(2)}</span></div>
+      <div class="bft-unit">Bft</div>
+      <div class="wind-dir">${dir}</div>
+      <div class="n-row">n&thinsp;=&thinsp;${n}</div>
+    `;
+  }
+}
+</script>
+
+</body>
+</html>
