@@ -293,11 +293,11 @@ for (let i = 0; i <= 10; i++) {
 // ZEITHORIZONTE (Spalten)
 // =============================================
 const HORIZONTE = [
-  { label: 'Aktuell',  sub: 'Di, 21.04. ~12 Uhr' },
-  { label: 'Morgen',  sub: 'Mi, 22.04. (+1 T)' },
-  { label: '23.04.',  sub: '+2 Tage' },
-  { label: '25.04.',  sub: '+4 Tage' },
-  { label: '28.04.',  sub: '+7 Tage' },
+  { label: 'Heute',     sub: 'Dienstag',  date: '21.04.' },
+  { label: 'Morgen',   sub: 'Mittwoch',  date: '22.04.' },
+  { label: 'Donnerstag', sub: '',        date: '23.04.' },
+  { label: 'Samstag',  sub: '',          date: '25.04.' },
+  { label: 'Dienstag', sub: '',          date: '28.04.' },
 ];
 
 // =============================================
@@ -402,7 +402,7 @@ for (let hi = 0; hi < HORIZONTE.length; hi++) {
 
   // Zeit-Zelle
   const tdTime = row.insertCell();
-  tdTime.innerHTML = `<div style="font-size:0.88rem;font-weight:700;color:#b0cce8;line-height:1.2">${h.label}</div><div style="font-size:0.64rem;color:#3d6070;margin-top:2px">${h.sub}</div>`;
+  tdTime.innerHTML = `<div style="font-size:0.88rem;font-weight:700;color:#b0cce8;line-height:1.2">${h.label}</div><div style="font-size:0.75rem;color:#7aafc8;margin-top:2px">${h.date || h.sub}</div>`;
 
   // Wind-Zellen je Ort
   for (const ort of ORTE) {
