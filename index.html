@@ -324,7 +324,7 @@ for (const ort of ORTE) {
 const tbody = tbl.createTBody();
 
 for (let hi = 0; hi < HORIZONTE.length; hi++) {
-  const h = HORIZONTE[hi];
+  const h = { label: HORIZONTE[hi], sub: '' };
   const row = tbody.insertRow();
 
   // Zeit-Zelle
