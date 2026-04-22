@@ -226,7 +226,7 @@ tbody td:first-child {
     Arkona &nbsp;&bull;&nbsp; Lubmin &nbsp;&bull;&nbsp; Göhren &nbsp;
     <span style="color:#2a4858">(West &rarr; Ost)</span>
   </p>
-  <p class="timestamp">Dienstag, 21. April 2026, 12:41 Uhr MESZ &nbsp;&bull;&nbsp; Quellen: DWD MOSMIX L, Open-Meteo (ICON, GFS, ECMWF) &mdash; 4 Modelle je Ort</p>
+  <p class="timestamp">Mittwoch, 22. April 2026, 09:03 Uhr MESZ &nbsp;&bull;&nbsp; Quellen: DWD MOSMIX L, Open-Meteo (ICON, GFS, ECMWF) &mdash; 4 Modelle je Ort</p>
 </header>
 
 <div class="scale-wrap">
@@ -241,7 +241,7 @@ tbody td:first-child {
 <div class="footnotes">
   <h3>Quellen &amp; Methodik</h3>
   <ul>
-    <li><a href="https://opendata.dwd.de/weather/local_forecasts/mos/MOSMIX_L/" target="_blank">DWD MOSMIX L</a> &mdash; ICON-basiert, stündlich, aktueller Lauf 21.04.2026; Stationen 10028/10033/10034/10035/10091/10184</li>
+    <li><a href="https://opendata.dwd.de/weather/local_forecasts/mos/MOSMIX_L/" target="_blank">DWD MOSMIX L</a> &mdash; ICON-basiert, stündlich, aktueller Lauf 22.04.2026; Stationen 10028/10033/10034/10035/10091/10184</li>
     <li><a href="https://open-meteo.com" target="_blank">Open-Meteo API</a> &mdash; ICON seamless, GFS seamless, ECMWF IFS 0.25°, Koordinatenabfrage 10 m Höhe, alle 6 Orte</li>
     <li><strong>Median:</strong> Ein Repräsentativwert pro Quelle (nächster verfügbarer Zeitstempel zum Zielzeitpunkt). Median und Stddev werden über die 4 Modellwerte berechnet (n=4).</li>
     <li><strong>Standardabweichung (&plusmn;):</strong> Streuung zwischen den Modellen in Bft &mdash; kleinere Werte = höhere Modellkonsistenz.</li>
@@ -293,11 +293,11 @@ for (let i = 0; i <= 10; i++) {
 // ZEITHORIZONTE (Spalten)
 // =============================================
 const HORIZONTE = [
-  { label: 'Heute',     sub: 'Dienstag',  date: '21.04.' },
-  { label: 'Morgen',   sub: 'Mittwoch',  date: '22.04.' },
-  { label: 'Donnerstag', sub: '',        date: '23.04.' },
-  { label: 'Samstag',  sub: '',          date: '25.04.' },
-  { label: 'Dienstag', sub: '',          date: '28.04.' },
+  { label: 'Heute', sub: '', date: '22.04.' },
+  { label: 'Donnerstag', sub: '', date: '23.04.' },
+  { label: 'Freitag', sub: '', date: '24.04.' },
+  { label: 'Sonntag', sub: '', date: '26.04.' },
+  { label: 'Mittwoch', sub: '', date: '29.04.' },
 ];
 
 // =============================================
@@ -310,66 +310,66 @@ const ORTE = [
     name: 'Dierhagen',
     sub:  'Fischland · 12°31\'O',
     data: [
-      [3.5, 0.5, 'NO', 4],
-      [3.5, 0.5, 'WNW', 4],
-      [3.5, 0.83, 'WNW', 4],
-      [5.0, 0.43, 'WNW', 4],
-      [3.5, 0.83, 'NNW', 4],
+      [3.0, 0.0, 'WNW', 4],
+      [3.5, 0.96, 'WNW', 4],
+      [3.0, 1.0, 'WNW', 4],
+      [3.0, 0.0, 'NNW', 4],
+      [4.0, 1.0, 'N', 4],
     ]
   },
   {
     name: 'Zingst',
     sub:  'Darß-Halbinsel · 12°41\'O',
     data: [
-      [3.5, 0.5, 'NO', 4],
-      [3.0, 0.43, 'NW', 4],
-      [3.5, 0.5, 'WNW', 4],
-      [5.0, 0.71, 'WNW', 4],
-      [3.5, 0.83, 'NNW', 4],
+      [3.0, 0.0, 'NW', 4],
+      [3.0, 0.5, 'WNW', 4],
+      [3.0, 0.5, 'WNW', 4],
+      [3.0, 0.0, 'NNW', 4],
+      [3.5, 0.96, 'NNO', 4],
     ]
   },
   {
     name: 'Stralsund',
     sub:  'Strelasund · 13°05\'O',
     data: [
-      [2.5, 0.5, 'NO', 4],
-      [3.5, 0.5, 'NW', 4],
-      [3.0, 0.0, 'NW', 4],
-      [5.0, 0.71, 'WNW', 4],
-      [3.0, 0.43, 'N', 4],
+      [3.0, 0.5, 'NW', 4],
+      [3.0, 0.0, 'WNW', 4],
+      [3.0, 0.0, 'WNW', 4],
+      [3.0, 0.5, 'NW', 4],
+      [3.5, 0.96, 'N', 4],
     ]
   },
   {
     name: 'Arkona',
     sub:  'Rügen Nord · 13°26\'O',
     data: [
-      [4.0, 0.71, 'NO', 4],
-      [4.0, 0.43, 'WNW', 4],
-      [3.0, 0.71, 'WNW', 4],
-      [5.0, 0.43, 'WNW', 4],
-      [3.0, 0.71, 'NNW', 4],
+      [4.0, 0.5, 'NW', 4],
+      [3.5, 0.58, 'WNW', 4],
+      [3.0, 0.5, 'WNW', 4],
+      [3.0, 0.5, 'NW', 4],
+      [3.0, 1.26, 'N', 4],
     ]
   },
   {
     name: 'Lubmin',
     sub:  'Greifswalder Bucht · 13°39\'O',
     data: [
-      [3.0, 0.71, 'NO', 4],
-      [3.0, 0.43, 'NW', 4],
-      [3.0, 0.43, 'NW', 4],
-      [5.0, 0.71, 'WNW', 4],
-      [3.0, 0.71, 'N', 4],
+      [3.0, 0.5, 'WNW', 4],
+      [3.0, 0.5, 'NW', 4],
+      [3.0, 0.0, 'WNW', 4],
+      [3.0, 0.5, 'NW', 4],
+      [3.5, 1.41, 'N', 4],
     ]
   },
   {
     name: 'Göhren',
     sub:  'Rügen Südost · 13°44\'O',
     data: [
-      [4.0, 0.0, 'NO', 4],
-      [4.0, 0.43, 'NW', 4],
-      [3.0, 0.43, 'NW', 4],
-      [5.0, 0.87, 'WNW', 4],
-      [3.0, 0.43, 'NNW', 4],
+      [4.0, 0.5, 'NW', 4],
+      [3.0, 0.5, 'NW', 4],
+      [3.0, 0.0, 'WNW', 4],
+      [4.0, 0.82, 'NNW', 4],
+      [3.5, 1.29, 'NNW', 4],
     ]
   },
 ];
