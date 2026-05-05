@@ -216,42 +216,10 @@ tbody td:first-child {
     Arkona &nbsp;&bull;&nbsp; Lubmin &nbsp;&bull;&nbsp; Göhren &nbsp;
     <span style="color:#2a4858">(West &rarr; Ost)</span>
   </p>
-  <p class="timestamp">Dienstag, 5. Mai 2026, 20:12 Uhr MESZ &nbsp;&bull;&nbsp; Quellen: DWD MOSMIX L, Open-Meteo (ICON, GFS, ECMWF) &mdash; 4 Modelle je Ort</p>
+  <p class="timestamp">Dienstag, 5. Mai 2026, 20:30 Uhr MESZ &nbsp;&bull;&nbsp; Quellen: DWD MOSMIX L, Open-Meteo (ICON, GFS, ECMWF) &mdash; 4 Modelle je Ort</p>
 </header>
 
-<div class="text-forecast-wrap">
-  <h2 class="tf-title">Kurzvorhersage</h2>
-    <div class="tf-row">
-      <div class="tf-day"><span class="tf-label">Heute</span><span class="tf-date">5. Mai.</span></div>
-      <div class="tf-bft" style="color:#4a9acc">2.0 Bft</div>
-      <div class="tf-dir">NNO</div>
-      <div class="tf-desc">Schwacher Wind</div>
-    </div>
-    <div class="tf-row">
-      <div class="tf-day"><span class="tf-label">Mittwoch</span><span class="tf-date">6. Mai.</span></div>
-      <div class="tf-bft" style="color:#5ab855">3.8 Bft</div>
-      <div class="tf-dir">NO</div>
-      <div class="tf-desc">Mäßiger Wind – surfbar</div>
-    </div>
-    <div class="tf-row">
-      <div class="tf-day"><span class="tf-label">Donnerstag</span><span class="tf-date">7. Mai.</span></div>
-      <div class="tf-bft" style="color:#4a9acc">3.0 Bft</div>
-      <div class="tf-dir">ONO</div>
-      <div class="tf-desc">Schwacher bis mäßiger Wind</div>
-    </div>
-    <div class="tf-row">
-      <div class="tf-day"><span class="tf-label">Samstag</span><span class="tf-date">9. Mai.</span></div>
-      <div class="tf-bft" style="color:#4a9acc">3.0 Bft</div>
-      <div class="tf-dir">ONO</div>
-      <div class="tf-desc">Schwacher bis mäßiger Wind</div>
-    </div>
-    <div class="tf-row">
-      <div class="tf-day"><span class="tf-label">Dienstag</span><span class="tf-date">12. Mai.</span></div>
-      <div class="tf-bft" style="color:#4a9acc">3.0 Bft</div>
-      <div class="tf-dir">SO</div>
-      <div class="tf-desc">Schwacher bis mäßiger Wind</div>
-    </div>
-</div>
+<p class="text-forecast">Heute (5.05.) 2 Bft aus NNO, leichte Modellunterschiede. Morgen, Mittwoch (6.05.) zieht der Wind deutlich an: küstenweit 3–4 Bft aus NO, an der exponierten Lage Göhren erwarten ICON und ECMWF bis zu 5 Bft, GFS und DWD MOSMIX liegen bei 4 Bft (Median 4.5 Bft, Modellstreuung ±0.58 Bft). Ab Donnerstag (7.05.) schwächt sich der Wind wieder ab auf 2–3 Bft aus ONO. Zum Wochenende (Samstag, 9.05.) stabilisiert sich der Wind bei 3–4 Bft aus O. Für Dienstag (12.05., +7 Tage) zeigen alle Modelle übereinstimmend 2–3 Bft.</p>
 
 <div class="scale-wrap">
   <p class="scale-title">Beaufort-Farbskala: 0 Bft = Dunkelblau &rarr; 3 Bft = Hellblau &rarr; 4 Bft = Hellgrün &rarr; 5 Bft = Dunkelgrün &rarr; 8 Bft = Rot &rarr; 10 Bft = Lila</p>
@@ -326,8 +294,8 @@ const ORTE = [
     data: [
       [2.0, 0.5, "NO", 4],
       [4.0, 0.5, "NO", 4],
-      [3.0, 0.5, "ONO", 4],
-      [3.0, 0.5, "ONO", 4],
+      [2.5, 0.58, "ONO", 4],
+      [3.0, 0.0, "O", 4],
       [3.0, 0.5, "N", 4],
     ]
   },
@@ -337,9 +305,9 @@ const ORTE = [
     data: [
       [2.0, 0.0, "NNO", 4],
       [3.0, 0.5, "NO", 4],
-      [2.5, 0.58, "ONO", 4],
-      [2.5, 0.58, "ONO", 4],
-      [3.0, 0.82, "SO", 4],
+      [2.0, 0.5, "ONO", 4],
+      [3.0, 0.5, "O", 4],
+      [3.0, 0.5, "OSO", 4],
     ]
   },
   {
@@ -348,9 +316,9 @@ const ORTE = [
     data: [
       [2.0, 0.0, "NNO", 4],
       [3.0, 0.0, "NO", 4],
-      [3.0, 0.5, "ONO", 4],
-      [3.0, 0.5, "ONO", 4],
-      [3.0, 0.82, "SO", 4],
+      [2.5, 0.58, "ONO", 4],
+      [3.0, 0.0, "O", 4],
+      [2.5, 0.58, "SO", 4],
     ]
   },
   {
@@ -360,8 +328,8 @@ const ORTE = [
       [2.0, 0.0, "NNO", 4],
       [3.5, 0.58, "NO", 4],
       [3.0, 0.5, "ONO", 4],
-      [2.5, 0.58, "ONO", 4],
-      [3.0, 0.5, "SO", 4],
+      [3.0, 0.5, "O", 4],
+      [3.0, 0.0, "OSO", 4],
     ]
   },
   {
@@ -369,20 +337,20 @@ const ORTE = [
     sub:  'Rügen Nord · 13°26\'O',
     data: [
       [2.0, 0.0, "N", 4],
-      [4.0, 0.82, "NO", 4],
-      [2.0, 0.5, "ONO", 4],
-      [3.0, 0.5, "ONO", 4],
-      [3.5, 0.58, "SO", 4],
+      [4.0, 0.82, "ONO", 4],
+      [2.0, 0.0, "ONO", 4],
+      [3.0, 0.0, "O", 4],
+      [3.0, 0.5, "SO", 4],
     ]
   },
   {
     name: "G\u00f6hren",
     sub:  'Rügen Südost · 13°44\'O',
     data: [
-      [2.0, 0.5, "NNO", 4],
+      [2.5, 0.58, "NNO", 4],
       [4.5, 0.58, "NO", 4],
-      [3.0, 0.5, "ONO", 4],
-      [3.0, 0.82, "ONO", 4],
+      [3.0, 0.0, "NO", 4],
+      [3.5, 0.58, "ONO", 4],
       [3.0, 0.5, "NO", 4],
     ]
   },
