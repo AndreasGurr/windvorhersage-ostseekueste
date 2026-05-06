@@ -216,10 +216,10 @@ tbody td:first-child {
     Arkona &nbsp;&bull;&nbsp; Lubmin &nbsp;&bull;&nbsp; Göhren &nbsp;
     <span style="color:#2a4858">(West &rarr; Ost)</span>
   </p>
-  <p class="timestamp">Mittwoch, 6. Mai 2026, 09:31 Uhr MESZ &nbsp;&bull;&nbsp; Quellen: DWD MOSMIX L, Open-Meteo (ICON, GFS, ECMWF) &mdash; 4 Modelle je Ort</p>
+  <p class="timestamp">Mittwoch, 6. Mai 2026, 10:43 Uhr MESZ &nbsp;&bull;&nbsp; Quellen: DWD MOSMIX L, Open-Meteo (ICON, GFS, ECMWF) &mdash; 4 Modelle je Ort</p>
 </header>
 
-<p class="text-forecast">Heute (6.05.) 4 Bft aus NO, leichte Modellunterschiede. Morgen, Donnerstag (7.05.) 3–4 Bft aus NO. Ab Freitag (8.05.) schwächt sich der Wind wieder ab auf 2–3 Bft aus O. Zum Wochenende (Sonntag, 10.05.) stabilisiert sich der Wind bei 2 Bft aus OSO. Für Mittwoch (13.05., +7 Tage) deuten die Modelle auf 3–4 Bft hin, weichen jedoch stärker voneinander ab (mittlere Streuung ±1.12 Bft) — die Mittelfristvorhersage ist auf diesem Horizont entsprechend unsicher.</p>
+<p class="text-forecast">Heute (6.05.) 4 Bft aus NO, leichte Modellunterschiede. Morgen, Donnerstag (7.05.) 3–4 Bft aus NO. Ab Freitag (8.05.) schwächt sich der Wind wieder ab auf 3–4 Bft aus ONO. Zum Wochenende (Sonntag, 10.05.) stabilisiert sich der Wind bei 2 Bft aus O. Für Mittwoch (13.05., +7 Tage) deuten die Modelle auf 3–4 Bft hin, weichen jedoch stärker voneinander ab (mittlere Streuung ±1.25 Bft) — die Mittelfristvorhersage ist auf diesem Horizont entsprechend unsicher.</p>
 
 <div class="scale-wrap">
   <p class="scale-title">Beaufort-Farbskala: 0 Bft = Dunkelblau &rarr; 3 Bft = Hellblau &rarr; 4 Bft = Hellgrün &rarr; 5 Bft = Dunkelgrün &rarr; 8 Bft = Rot &rarr; 10 Bft = Lila</p>
@@ -294,9 +294,9 @@ const ORTE = [
     data: [
       [4.0, 0.5, "NO", 4],
       [3.0, 0.0, "NO", 4],
-      [3.0, 0.5, "O", 4],
+      [3.0, 0.0, "O", 4],
       [2.5, 0.96, "ONO", 4],
-      [3, 1.15, "W", 3],
+      [3.5, 1.29, "W", 4],
     ]
   },
   {
@@ -304,10 +304,10 @@ const ORTE = [
     sub:  'Darß-Halbinsel · 12°41\'O',
     data: [
       [3.0, 0.5, "NO", 4],
-      [3.0, 0.5, "NO", 4],
+      [3.0, 0.0, "NO", 4],
       [3.0, 0.5, "O", 4],
-      [2.5, 0.58, "OSO", 4],
-      [3, 1.15, "W", 3],
+      [2.5, 0.96, "O", 4],
+      [3.0, 1.26, "W", 4],
     ]
   },
   {
@@ -315,10 +315,10 @@ const ORTE = [
     sub:  'Strelasund · 13°05\'O',
     data: [
       [3.0, 0.0, "NO", 4],
-      [3.0, 0.5, "ONO", 4],
-      [3.0, 0.5, "O", 4],
-      [2.0, 1.15, "SO", 4],
-      [3, 1.15, "W", 3],
+      [3.0, 0.0, "ONO", 4],
+      [3.0, 0.0, "O", 4],
+      [2.0, 1.15, "OSO", 4],
+      [3.0, 1.26, "W", 4],
     ]
   },
   {
@@ -327,9 +327,9 @@ const ORTE = [
     data: [
       [4.0, 0.5, "NO", 4],
       [3.0, 0.0, "NO", 4],
-      [3.0, 0.5, "ONO", 4],
-      [2.5, 0.96, "OSO", 4],
-      [3, 1.15, "W", 3],
+      [3.0, 0.0, "ONO", 4],
+      [2.5, 0.96, "O", 4],
+      [3.0, 1.26, "W", 4],
     ]
   },
   {
@@ -338,9 +338,9 @@ const ORTE = [
     data: [
       [4.0, 0.82, "ONO", 4],
       [3.0, 0.0, "ONO", 4],
-      [2.5, 0.58, "ONO", 4],
-      [2.5, 0.96, "OSO", 4],
-      [4, 1.0, "W", 3],
+      [3.0, 0.5, "ONO", 4],
+      [2.5, 0.58, "O", 4],
+      [4.0, 0.82, "W", 4],
     ]
   },
   {
@@ -349,9 +349,9 @@ const ORTE = [
     data: [
       [4.0, 0.5, "ONO", 4],
       [3.5, 0.58, "NO", 4],
-      [3.0, 0.5, "ONO", 4],
+      [3.5, 0.58, "ONO", 4],
       [2.5, 0.96, "OSO", 4],
-      [4, 1.15, "WNW", 3],
+      [4.0, 1.63, "W", 4],
     ]
   },
 ];
