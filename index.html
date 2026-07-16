@@ -216,10 +216,10 @@ tbody td:first-child {
     Arkona &nbsp;&bull;&nbsp; Lubmin &nbsp;&bull;&nbsp; Göhren &nbsp;
     <span style="color:#2a4858">(West &rarr; Ost)</span>
   </p>
-  <p class="timestamp">Mittwoch, 15. Juli 2026, 09:31 Uhr MESZ &nbsp;&bull;&nbsp; Quellen: DWD MOSMIX L, Open-Meteo (ICON, GFS, ECMWF) &mdash; 4 Modelle je Ort</p>
+  <p class="timestamp">Donnerstag, 16. Juli 2026, 09:30 Uhr MESZ &nbsp;&bull;&nbsp; Quellen: DWD MOSMIX L, Open-Meteo (ICON, GFS, ECMWF) &mdash; 4 Modelle je Ort</p>
 </header>
 
-<p class="text-forecast">Heute (15.07.) 3 Bft aus ONO, leichte Modellunterschiede. Morgen, Donnerstag (16.07.) 2–3 Bft aus ONO. Ab Freitag (17.07.) schwächt sich der Wind wieder ab auf 2 Bft aus NO. Zum Wochenende (Sonntag, 19.07.) stabilisiert sich der Wind bei 4–5 Bft aus NNW. Für Mittwoch (22.07., +7 Tage) zeigen alle Modelle übereinstimmend 3–4 Bft.</p>
+<p class="text-forecast">Heute (16.07.) 3 Bft aus ONO, alle Modelle einig. Morgen, Freitag (17.07.) 2–3 Bft aus OSO. Ab Samstag (18.07.) schwächt sich der Wind wieder ab auf 4–5 Bft aus W. Zum Wochenende (Montag, 20.07.) stabilisiert sich der Wind bei 3–4 Bft aus WNW. Für Donnerstag (23.07., +7 Tage) zeigen alle Modelle übereinstimmend 3–4 Bft.</p>
 
 <div class="scale-wrap">
   <p class="scale-title">Beaufort-Farbskala: 0 Bft = Dunkelblau &rarr; 3 Bft = Hellblau &rarr; 4 Bft = Hellgrün &rarr; 5 Bft = Dunkelgrün &rarr; 8 Bft = Rot &rarr; 10 Bft = Lila</p>
@@ -233,10 +233,10 @@ tbody td:first-child {
 <div class="footnotes">
   <h3>Quellen &amp; Methodik</h3>
   <ul>
-    <li><a href="https://opendata.dwd.de/weather/local_forecasts/mos/MOSMIX_L/" target="_blank">DWD MOSMIX L</a> &mdash; Modelllauf: 15.07.2026 05:00 Uhr</li>
-    <li><a href="https://open-meteo.com" target="_blank">Open-Meteo ICON seamless</a> &mdash; Modelllauf: 15.07.2026 02:00 Uhr</li>
-    <li><a href="https://open-meteo.com" target="_blank">Open-Meteo GFS seamless</a> &mdash; Modelllauf: 15.07.2026 02:00 Uhr</li>
-    <li><a href="https://open-meteo.com" target="_blank">Open-Meteo ECMWF IFS 0.25°</a> &mdash; Modelllauf: 15.07.2026 02:00 Uhr</li>
+    <li><a href="https://opendata.dwd.de/weather/local_forecasts/mos/MOSMIX_L/" target="_blank">DWD MOSMIX L</a> &mdash; Modelllauf: 16.07.2026 05:00 Uhr</li>
+    <li><a href="https://open-meteo.com" target="_blank">Open-Meteo ICON seamless</a> &mdash; Modelllauf: 16.07.2026 02:00 Uhr</li>
+    <li><a href="https://open-meteo.com" target="_blank">Open-Meteo GFS seamless</a> &mdash; Modelllauf: 16.07.2026 02:00 Uhr</li>
+    <li><a href="https://open-meteo.com" target="_blank">Open-Meteo ECMWF IFS 0.25°</a> &mdash; Modelllauf: 16.07.2026 02:00 Uhr</li>
     <li><strong>Median:</strong> Tagesmittel 06–20 Uhr pro Quelle. Median und Stddev über die 4 Modellwerte (n=4).</li>
     <li><strong>Standardabweichung (&plusmn;):</strong> Streuung zwischen den Modellen in Bft &mdash; kleinere Werte = höhere Modellkonsistenz.</li>
     <li><strong>Windrichtung:</strong> Herkunftsrichtung (meteorolog. Konvention). Zirkulärer Mittelwert aller Modelle.</li>
@@ -280,11 +280,11 @@ for (let i = 0; i <= 10; i++) {
 }
 
 const HORIZONTE = [
-  { label: "Heute", sub: '', date: "15.07." },
-  { label: "Donnerstag", sub: '', date: "16.07." },
+  { label: "Heute", sub: '', date: "16.07." },
   { label: "Freitag", sub: '', date: "17.07." },
-  { label: "Sonntag", sub: '', date: "19.07." },
-  { label: "Mittwoch", sub: '', date: "22.07." },
+  { label: "Samstag", sub: '', date: "18.07." },
+  { label: "Montag", sub: '', date: "20.07." },
+  { label: "Donnerstag", sub: '', date: "23.07." },
 ];
 
 const ORTE = [
@@ -292,32 +292,32 @@ const ORTE = [
     name: "Dierhagen",
     sub:  'Fischland · 12°31\'O',
     data: [
-      [3.0, 0.0, "ONO", 4],
       [2.0, 0.5, "ONO", 4],
-      [2.0, 0.0, "NO", 4],
-      [4.0, 0.5, "NNW", 4],
+      [2.0, 0.0, "OSO", 4],
+      [4.0, 0.5, "W", 4],
       [3.0, 0.0, "WNW", 4],
+      [3.5, 0.58, "WNW", 4],
     ]
   },
   {
     name: "Zingst",
     sub:  'Darß-Halbinsel · 12°41\'O',
     data: [
-      [3.0, 0.0, "ONO", 4],
-      [2.5, 0.58, "ONO", 4],
-      [2.0, 0.0, "NO", 4],
-      [4.0, 0.0, "NNW", 4],
+      [3.0, 0.5, "ONO", 4],
+      [2.0, 0.5, "OSO", 4],
+      [4.5, 0.58, "W", 4],
       [3.0, 0.5, "WNW", 4],
+      [3.0, 0.0, "WNW", 4],
     ]
   },
   {
     name: "Stralsund",
     sub:  'Strelasund · 13°05\'O',
     data: [
-      [3.0, 0.0, "ONO", 4],
       [3.0, 0.5, "O", 4],
-      [2.0, 0.0, "ONO", 4],
-      [4.0, 0.0, "NNW", 4],
+      [2.0, 0.5, "OSO", 4],
+      [4.0, 0.0, "W", 4],
+      [3.0, 0.5, "WNW", 4],
       [3.0, 0.0, "WNW", 4],
     ]
   },
@@ -325,33 +325,33 @@ const ORTE = [
     name: "Lubmin",
     sub:  'Greifswalder Bucht · 13°39\'O',
     data: [
-      [3.0, 0.0, "ONO", 4],
       [3.0, 0.5, "ONO", 4],
-      [2.0, 0.0, "NO", 4],
-      [4.0, 0.82, "NW", 4],
-      [3.0, 0.5, "WNW", 4],
+      [2.0, 0.5, "OSO", 4],
+      [4.0, 0.0, "W", 4],
+      [3.0, 0.82, "WNW", 4],
+      [3.0, 0.0, "WNW", 4],
     ]
   },
   {
     name: "Arkona",
     sub:  'Rügen Nord · 13°26\'O',
     data: [
-      [2.5, 0.58, "ONO", 4],
-      [3.0, 0.0, "O", 4],
-      [2.0, 0.0, "ONO", 4],
-      [4.5, 0.58, "NNW", 4],
-      [3.0, 0.0, "WNW", 4],
+      [3.0, 0.5, "O", 4],
+      [2.5, 0.58, "OSO", 4],
+      [5.0, 0.5, "W", 4],
+      [4.0, 0.5, "WNW", 4],
+      [4.0, 0.5, "WNW", 4],
     ]
   },
   {
     name: "G\u00f6hren",
     sub:  'Rügen Südost · 13°44\'O',
     data: [
-      [3.0, 0.0, "ONO", 4],
       [3.0, 0.5, "ONO", 4],
-      [2.5, 0.58, "NO", 4],
-      [5.0, 0.82, "NNW", 4],
-      [4.0, 0.5, "WNW", 4],
+      [3.0, 0.0, "O", 4],
+      [5.0, 0.82, "W", 4],
+      [4.0, 0.0, "WNW", 4],
+      [4.0, 0.82, "WNW", 4],
     ]
   },
 ];
